@@ -1,8 +1,11 @@
-resource "azurerm_public_ip" "public_ip" {
-  name                = var.public_ip_name
-  location            = var.location
+resource "azurerm_public_ip" "pip" {
+  for_each = var.public_ips
+
+  name                = each.key
   resource_group_name = var.resource_group_name
-  allocation_method   = var.public_ip_allocation_method
-  sku                 = var.public_ip_sku
-  tags                = var.tags
+  location            = var.location
+  allocation_method   = each.value.allocation_method
+  sku                 = each.value.sku
+
+  tags = var.tags
 }

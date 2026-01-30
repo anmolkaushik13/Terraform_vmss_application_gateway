@@ -58,12 +58,12 @@ variable "sku_name" {
 }
 
 variable "enclave_type" {
-  description = "The enclave type for the SQL Database (if using Always Encrypted)"
-  type        = string
-  default     = "None"
+  type    = string
+  default = "Default"
+
   validation {
-    condition     = contains(["None", "Enabled"], var.enclave_type)
-    error_message = "Enclave type must be either 'None' or 'Enabled'."
+    condition     = contains(["Default", "VBS"], var.enclave_type)
+    error_message = "enclave_type must be Default or VBS"
   }
 }
 
